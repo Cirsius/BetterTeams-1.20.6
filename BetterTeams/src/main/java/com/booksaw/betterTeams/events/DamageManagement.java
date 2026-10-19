@@ -16,8 +16,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * This class is used to ensure that members of the same team cannot hit each
- * other
+ * This class is used to ensure that members of the same team cannot hit each other
  *
  * @author booksaw
  */
@@ -32,8 +31,8 @@ public class DamageManagement implements Listener {
 	}
 
 	/**
-	 * This is used to cancel any events which would cause 2 players of the same
-	 * team to damage each other
+	 * This is used to cancel any events which would cause 2 players of the same team to damage each
+	 * other
 	 *
 	 * @param e the damage event
 	 */
@@ -54,11 +53,13 @@ public class DamageManagement implements Listener {
 					// they are on the same team
 					e.setCancelled(true);
 				}
-			} else if (e.getDamager() instanceof Projectile && !(e.getDamager() instanceof ThrownPotion)) {
+			} else if (e.getDamager() instanceof Projectile
+					&& !(e.getDamager() instanceof ThrownPotion)) {
 				Projectile arrow = (Projectile) e.getDamager();
 				ProjectileSource source = arrow.getShooter();
 				if (source instanceof Player
-						&& !Objects.requireNonNull(Team.getTeam((Player) source)).canDamage(temp, (Player) source)) {
+						&& !Objects.requireNonNull(Team.getTeam((Player) source))
+						.canDamage(temp, (Player) source)) {
 					// they are on the same team
 					if (disableSelf && source == e.getEntity()) {
 						return;
@@ -69,7 +70,8 @@ public class DamageManagement implements Listener {
 				ThrownPotion arrow = (ThrownPotion) e.getDamager();
 				ProjectileSource source = arrow.getShooter();
 				if (source instanceof Player
-						&& !Objects.requireNonNull(Team.getTeam((Player) source)).canDamage(temp, (Player) source)) {
+						&& !Objects.requireNonNull(Team.getTeam((Player) source))
+						.canDamage(temp, (Player) source)) {
 					// they are on the same team
 					e.setCancelled(true);
 				}
@@ -77,7 +79,8 @@ public class DamageManagement implements Listener {
 				TNTPrimed explosive = (TNTPrimed) e.getDamager();
 				Entity source = explosive.getSource();
 				if (source instanceof Player
-						&& !Objects.requireNonNull(Team.getTeam((Player) source)).canDamage(temp, (Player) source)) {
+						&& !Objects.requireNonNull(Team.getTeam((Player) source))
+						.canDamage(temp, (Player) source)) {
 					// they are on the same team
 					if (disableSelf && source == e.getEntity()) {
 						return;
@@ -91,8 +94,7 @@ public class DamageManagement implements Listener {
 	}
 
 	/**
-	 * This method is used to detect if a negative potion is being thrown at members
-	 * of the same team
+	 * This method is used to detect if a negative potion is being thrown at members of the same team
 	 *
 	 * @param e the potion splash event
 	 */
@@ -120,6 +122,7 @@ public class DamageManagement implements Listener {
 					|| type.equals(PotionEffectType.WEAKNESS)
 					|| type.equals(PotionEffectType.POISON)) {
 				cancel = true;
+				break;
 			}
 		}
 
